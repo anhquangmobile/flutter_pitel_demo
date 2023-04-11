@@ -235,7 +235,7 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
             icon: pitelCall.audioMuted ? Icons.mic_off : Icons.mic,
             checked: pitelCall.audioMuted,
             fillColor: Colors.green,
-            onPressed: () => pitelCall.mute(),
+            onPressed: () => pitelCall.mute(callId: _callId),
           ));
 
           if (voiceonly) {
