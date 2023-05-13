@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ import 'package:plugin_pitel/component/sip_pitel_helper_listener.dart';
 import 'package:plugin_pitel/pitel_sdk/pitel_call.dart';
 import 'package:plugin_pitel/pitel_sdk/pitel_client.dart';
 import 'package:plugin_pitel/sip/sip_ua.dart';
+import 'package:wakelock/wakelock.dart';
 
 class CallScreenWidget extends StatefulWidget {
   CallScreenWidget({Key? key, this.receivedBackground = false})
@@ -40,6 +42,9 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
   initState() {
     super.initState();
     pitelCall.addListener(this);
+    if (Platform.isAndroid) {
+      Wakelock.enable();
+    }
     if (voiceonly) {
       _initRenderers();
     }
@@ -151,6 +156,9 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
 
   // Handle hangup and reset timer
   void _handleHangup() {
+    if (Platform.isAndroid) {
+      Wakelock.disable();
+    }
     pitelCall.hangup(callId: _callId);
     if (_timer.isActive) {
       _timer.cancel();

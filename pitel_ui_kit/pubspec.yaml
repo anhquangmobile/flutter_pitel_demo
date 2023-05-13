@@ -38,6 +38,7 @@ dependencies:
   go_router: 3.0.3
   plugin_pitel:
     path: ../pitel_sdk
+  wakelock: ^0.6.2
 
 dev_dependencies:
   flutter_test:

@@ -194,6 +194,7 @@ class PitelCall implements SipUaHelperListener {
         _localRenderer?.srcObject = stream;
       }
       event.stream?.getAudioTracks().first.enableSpeakerphone(false);
+      // Helper.setSpeakerphoneOn(false);
       _localStream = stream;
     }
     if (event.originator == 'remote') {
